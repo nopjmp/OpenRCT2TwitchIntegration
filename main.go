@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/nicklaw5/helix"
 )
@@ -230,5 +231,5 @@ func main() {
 	r.HandleFunc("/channel/{channel}/audience", audienceRequest)
 
 	fmt.Println("Listening on 3000")
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3000", handlers.CombinedLoggingHandler(os.Stdout, r))
 }
